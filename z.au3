@@ -38,7 +38,7 @@ $q=Random(1,99999,1)
 $taikhoan=("epitchi")
 $username =($q & "epitchi" & $q)
 
-$passUser = (Random(1,99999,1) & "epitchi")
+$passUser = ("Laypro12")
 
 Local $arrTaiKhoan[20]
 Local $i = 0;
@@ -72,7 +72,7 @@ send('{enter}')
 
 
 
-For $posUser = 0 To 19 
+For $posUser =13 To 19 
 Global $web = _IECreate ('https://id.zing.vn/v2/register?apikey=92140c0e46c54994812403f564787c14&pid=38&next=https%3A%2F%2Fid.zing.vn%2Fv2%2Finfosetting%3Fapikey%3D92140c0e46c54994812403f564787c14%26pid%3D38')
 WinMove('Zing ID - Zing Passport - Tài khoản Zing của VNG - Internet Explorer','',0,0)
 local $ten =_IEGetObjByname($web,'fullname')
@@ -83,8 +83,11 @@ local $see =_IEGetObjByName($web,'gender')
 local $see1 =_IELinkClickByText($web, "zid_regbtn")
 local $see2 =_IEGetObjByName($web, "zid_regbtn")
 
-_IEFormElementSetValue ($ten,$q & "epitchi" & Random(1,99999,1))
-_IEFormElementSetValue ($acc,"epitchi" & $posUser)
+$tk =  $q & "epitchi" & Random(1,99999,1);
+$mk =  "ss347sbw" & $posUser
+
+_IEFormElementSetValue ($ten,$tk)
+_IEFormElementSetValue ($acc,$mk)
 _IEFormElementSetValue ($pass,$passUser)
 _IEFormElementSetValue ($pass1,$passUser)
 _IEAction($see,"click")
@@ -101,7 +104,13 @@ _IEFormSubmit($oForm)
 _IEAction($oForm,"click")
 _IEAction($oQuery,"click")
 
-	Sleep(5000);
+	Sleep(5000)
+	$cu	= GUICtrlRead($luu,"user "& $tk  & @crlf & $passUser);
+	$luuvao=GUICtrlSetData($luu,"user "& $tk & @crlf & $passUser&@CRLF&$cu);
+	$save=GUICtrlRead($luu);
+    FileWrite(@DesktopDir&'\acc.txt',$save)
+    MsgBox(0,0,'da luu tren man inh may tinh ra ngoai de xem ten file (acc.txt)')
+  
 	Send("{F5}")
 Next 
 	
